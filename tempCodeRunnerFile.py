@@ -1,1 +1,0 @@
-gTTS(text=str, lang=lang)

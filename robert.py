@@ -1,17 +1,10 @@
-import functions
+import modes
 import speech_recognition as sr
-from helper import (
-    record_sample, 
-    detect_command, 
-    detect_mention, 
-    say_text
-)
-from consts import (
-    names, 
-    commands
-)
+from helper import record_sample
+
 
 r = sr.Recognizer()
+mode = "translate"
 
 
 def main():
@@ -26,23 +19,7 @@ def main():
 
         print(text)
 
-        if not detect_mention(text):
-            print("No mention")
-            continue
-
-        command = detect_command(text)
-        if command is None:
-            print("No command")
-            continue
-
-        print(f"Coomand named {command} found")
-        output = getattr(functions, command)(text)
-        print(f"Output: {output}")
-
-        if output is None:
-            print("No output")
-            continue
-        say_text(output)
+        getattr(modes, mode)(text)
 
 
 
