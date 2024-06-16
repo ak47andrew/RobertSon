@@ -1,32 +1,30 @@
-from consts import names, commands
+from helper import get_normal_form
+from consts import hello_aliases
 
 
-def clean_up_text(text):
-    for i in names + tuple(commands.keys()):
-        text = text.replace(i, "")
+def echo(text: str):
     return text
 
 
-def echo(str):
-    return clean_up_text(str)
-
-
-def exit_app(*_):
+def exit_app():
     exit()
 
 
-# def translate(str):
-#     translated = argostranslate.translate.translate(clean_up_text(str), "ru", "ja")
-#     say_text(translated, "ja")
+def hi(name: str) -> str:
+    """
+    This function greets the user with a personalized message.
 
+    Args:
+    name (str): The name of the person to be greeted.
 
-def hi_dad(*_):
-    return "Привет, папа Квас"
+    Returns:
+    str: A personalized greeting message.
 
-
-def hi_mom(*_):
-    return "Привет, мама Аля"
-
-
-def hi_vlad(*_):
-    return "Привет, Влад"
+    The function first normalizes the input name using `get_normal_form(name)`.
+    Then, it looks up the normalized name in the `hello_aliases` dictionary.
+    If the name is found in the dictionary, it uses the corresponding value as the greeting.
+    If the name is not found, it uses the original normalized name as the greeting.
+    """
+    form = get_normal_form(name)
+    form = hello_aliases.get(form, form)
+    return f"Привет, {form}"
