@@ -2,6 +2,7 @@
 
 
 # Constants for names, commands, modes, hello_aliases, and languages
+mode_regex = re.compile(r"перейди в (.*)режим(.*)")
 
 # Names: List of names in Cyrillic script
 names = [
@@ -23,9 +24,9 @@ commands = {
 
 # Modes: Dictionary of mode names and their corresponding values
 modes = {
-    "нормальный": "noraml",
-    "классический": "noraml",
-    "стандартный": "noraml",
+    "нормальный": "normal",
+    "классический": "normal",
+    "стандартный": "normal",
     "перевод": "translate",
 }
 
