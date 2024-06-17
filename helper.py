@@ -119,7 +119,8 @@ def translate(text: str, from_lang: str, to_lang: str) -> str:
     The function uses the `argostranslate.translate` library to translate the input text from the specified source 
     language to the specified target language. The translated text is then returned as a string.
     """
-    return argostranslate.translate.translate(text, from_lang, to_lang)
+   # return argostranslate.translate.translate(text, from_lang, to_lang)
+   
 
 def get_normal_form(text: str) -> str:
     """
