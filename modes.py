@@ -61,4 +61,3 @@ def translate(text: str, data: str) -> None:
     fl, tl = get_language(data)
     trans = helper_translate(text, fl, tl)
     say_text(trans, tl)
- 

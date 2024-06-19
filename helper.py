@@ -5,9 +5,9 @@ import os
 from contextlib import suppress
 from typing import Callable, Optional
 from consts import names, commands, mode_regex, modes, from_language, to_language, from_language_default, to_language_default, languages
-import argostranslate.translate
 import pymorphy3
 import re
+from deep_translator import GoogleTranslator
 
 
 morph = pymorphy3.MorphAnalyzer()
@@ -119,7 +119,8 @@ def translate(text: str, from_lang: str, to_lang: str) -> str:
     The function uses the `argostranslate.translate` library to translate the input text from the specified source 
     language to the specified target language. The translated text is then returned as a string.
     """
-   # return argostranslate.translate.translate(text, from_lang, to_lang)
+    return GoogleTranslator(source=from_lang, target=to_lang).translate(text)
+    # return argostranslate.translate.translate(text, from_lang, to_lang)
    
 
 def get_normal_form(text: str) -> str:

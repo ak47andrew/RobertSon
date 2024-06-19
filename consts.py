@@ -69,5 +69,5 @@ languages = {
 # Regex patterns for language detection
 from_language = re.compile(r"с (\w+)", re.UNICODE)
 to_language = re.compile(r"на (\w+)", re.UNICODE)
-from_language_default = "ru"
+from_language_default = "auto"
 to_language_default = "en"
