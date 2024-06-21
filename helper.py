@@ -10,7 +10,24 @@ import re
 from deep_translator import GoogleTranslator
 
 
+
 morph = pymorphy3.MorphAnalyzer()
+
+def record_sample(r: sr.Recognizer, language) -> str:
+    with sr.Microphone() as mic:
+        audio = r.listen(mic)
+
+        '''
+    lang:str
+    
+    if mode == 'normal':
+        lang = 'ru'
+    else:
+        lang = from_language
+        '''
+        
+
+    return google.recognize_legacy(r, audio, language=str(language)).lower()
 
 
 def remove_mention(text: str) -> tuple[str, bool]:
@@ -56,8 +73,8 @@ def change_mode(current_mode: str, text: str) -> tuple[str, str]:
     if len(k := re.findall(mode_regex, text)) == 0:
         return current_mode, ""
 
-    a, b = k[0]  # Убейте меня за этот код ;(
-    c = a + b  # Один из них по любому будет пустой строкой
+    a, b = k[0]
+    c = a + b 
     c, *args = c.split()
     c = get_normal_form(c)
     args = " ".join(args)
@@ -78,4 +95,4 @@ def get_language(text: str) -> tuple[str, str]:
     to_text = get_normal_form(to_text)
     to_text = languages.get(to_text, to_language_default)
 
-    return from_text, to_text, from_language
+    return from_text, to_text
