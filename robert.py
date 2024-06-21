@@ -14,13 +14,15 @@ def main():
         if mode == "normal":
             language = 'ru'
         elif mode == "translate":
-            language  = tuple[0]
+            fl, tl = get_language(text)
+            language  = fl
+
+        print (language)
 
         print("Recording...")
         try:
             text = record_sample(r, language)
         except sr.UnknownValueError:
-
             print("No audio provided")
             continue
 
