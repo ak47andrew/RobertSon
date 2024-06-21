@@ -1,10 +1,12 @@
 ﻿import re
+from deep_translator import GoogleTranslator
 
 
-# Constants for names, commands, modes, hello_aliases, and languages
 mode_regex = re.compile(r"перейди в (.*)режим(.*)")
 
-# Names: List of names in Cyrillic script
+lang:str
+
+
 names = [
     "роберт",
     "роберта",
@@ -16,17 +18,17 @@ names = [
     "роберт андреевич",
 ]
 
-# Commands: Dictionary of command patterns and their corresponding functions
+
 commands = {
     r"(?:скажи|повтори) (.*)": "echo",
     r"поздоровайся с ([\w ]+)": "hi",
     r"стоп|хватит|выход|достаточно": "exit_app",
     r"кто ты|кто ты такой": "about_me",
-    r"какими языками ты владеешь|какие языки ты знаешь": "languages_list",
+    r"ты говоришь на": "check language",
     r"как включить режим перевода|как перейти в режим перевода|как выйти из режима перевода|как перейти в нормальный режим":"help",
 }
 
-# Modes: Dictionary of mode names and their corresponding values
+
 modes = {
     "нормальный": "normal",
     "классический": "normal",
@@ -34,7 +36,7 @@ modes = {
     "перевод": "translate",
 }
 
-# Hello aliases: Dictionary of aliases and their corresponding full names
+
 hello_aliases = {
     "папа": "папа Квас",
     "мама": "мама Аля",
@@ -44,29 +46,61 @@ hello_aliases = {
     "товарищем сталин": "тимофей",
 }
 
-# Languages: Dictionary of language codes and their corresponding names
+
 languages = {
-    "русский": "ru",
-    "английский": "en",
-    "немецкий": "de",
-    "французский": "fr",
-    "итальянский": "it",
-    "португальский": "pt",
-    "шведский": "sv",
-    "норвежский": "no",
-    "испанский": "es",
-    "финский": "fi",
-    "турецкий": "tr",
-    "чешский": "cs",
-    "украинский": "uk",
-    "польский": "pl",
-    "нидерландский": "nl",
-    "голландский": "nl",
-    "испанский": "es",
-    "японский": "ja",
+    'африканский': 'af', 
+    'албанский':'sq',
+    'арабский': 'ar', 
+    'бенгальский': 'bn', 
+    'боснийский': 'bs', 
+    'болгарский': 'bg', 
+    'каталонский': 'ca', 
+    'китайский (simplified)': 'zh-CN',
+    'китайский (traditional)': 'zh-TW', 
+    'чешский': 'cs', 
+    'датский': 'da', 
+    'немецкий': 'de', 
+    'греческий': 'el', 
+    'голландский|нидерландский':'nl',
+    'иврит': 'iw', 
+    'хинди': 'hi', 
+    'венгерский': 'hu', 
+    'исландский': 'is', 
+    'индонезийский': 'id', 
+    'итальянский': 'it', 
+    'японский': 'ja', 
+    'яванский': 'jw', 
+    'каннада': 'kn',  
+    'кхмерский': 'km', 
+    'корейский': 'ko', 
+    'латынь|латинский': 'la', 
+    'латышский': 'lv', 
+    'малайский': 'ms', 
+    'малаялам': 'ml', 
+    'маратхи': 'mr', 
+    'myanmar': 'my', 
+    'непальский': 'ne', 
+    'норвежский': 'no', 
+    'польский': 'pl', 
+    'португальский': 'pt', 
+    'румынский': 'ro', 
+    'русский': 'ru', 
+    'сербский': 'sr', 
+    'сингальский': 'si', 
+    'словакский': 'sk', 
+    'испанский': 'es', 
+    'суданский': 'su', 
+    'суахили': 'sw', 
+    'шведский': 'sv', 
+    'тамильский': 'ta', 
+    'телугу': 'te', 
+    'тайский': 'th', 
+    'турецкий': 'tr', 
+    'украинский': 'uk', 
+    'урду': 'ur', 
+    'вьетнамский': 'vi', 
 }
 
-# Regex patterns for language detection
 from_language = re.compile(r"с (\w+)", re.UNICODE)
 to_language = re.compile(r"на (\w+)", re.UNICODE)
 from_language_default = "auto"
