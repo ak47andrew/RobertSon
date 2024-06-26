@@ -108,15 +108,25 @@ def get_normal_form(text: str) -> str:
 # функция для смены режима 
 def change_mode(current_mode: str, text: str) -> tuple[str, str]:
 
+    # регулярное выражение для определения режима
     if len(k := re.findall(mode_regex, text)) == 0:
         return current_mode, ""
     
+    # если регулярное выражение находится в тексте, оно разбивается на две части
+    # одна из этих частей всегда пустая
     a, b = k[0]
     c = a + b 
+
+    # разбивается текст на слова
     c, *args = c.split()
+
+    # текст переводится в начальную форму
     c = get_normal_form(c)
+     
+    # параметры режима берутся из текста
     args = " ".join(args)
 
+    # определяется текущий режим
     current_mode = modes.get(c, current_mode)
 
     # функция возвращает режим и его параметры
@@ -125,15 +135,28 @@ def change_mode(current_mode: str, text: str) -> tuple[str, str]:
 
 # функция для определения языков, с которого и на который будет осуществляться перевод
 def get_language(text: str) -> tuple[str, str]:
+
+    # регулярное выражение для определения языка, с которого будет осуществляться перевод
     k = re.findall(from_language, text)
+
+    # если регулярное выражение находится в тексте, оно разбивается на две части
     from_text = from_language_default if len(k) == 0 else k[0]
+
+    # текст переводится в начальную форму
     from_text = get_normal_form(from_text)
+
+    # язык нвытаскивается из списка в константах
     from_text = languages.get(from_text, from_language_default)
 
+
+    # регулярное выражение для определения языка, на который будет осуществляться перевод
+    # та же схема, что и с первым языком
     k = re.findall(to_language, text)
     to_text = to_language_default if len(k) == 0 else k[0]
     to_text = get_normal_form(to_text)
     to_text = languages.get(to_text, to_language_default)
 
+
+    # функция возвращает языки, с которого и на который будет осуществляться перерод
     return from_text, to_text
 

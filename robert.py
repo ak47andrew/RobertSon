@@ -5,7 +5,7 @@ from helper import record_sample, change_mode, get_language
 
 #для распознавания речи используется функция из модуля speech_recognition
 r = sr.Recognizer()
-
+from gestures import *
 # по умолчанию робот нвходится в нормальном режиме
 # режим имеет пустые параметры
 mode = "normal"

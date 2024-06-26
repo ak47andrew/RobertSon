@@ -57,13 +57,12 @@ def translate(text: str, data: str) -> None:
     if text == GoogleTranslator(source='ru', target =fl).translate('стоп'):
         exit()
 
-    elif GoogleTranslator(source='ru', target=fl).translate('перейди в режим перевода') in text:
-        change_mode(normal, translate, data)
-    
-    elif text == GoogleTranslator(source='ru', target=fl).translate('вернись в нормальный режим'):
-        pass
 
+    # если программе не сказать завершиться, она будет осуществлять переод
     else:
+           # перевод текста
            trans = helper_translate(text, fl, tl)
+
+           # синтез речи из переведенного текста
            say_text(trans, tl)
 
